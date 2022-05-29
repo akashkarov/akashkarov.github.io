@@ -52,6 +52,7 @@
 
         function tryWord() {
             var word = document.getElementById("word").value;
+            word = word.toLowerCase();
             document.getElementById("word").value = "";
             if (word.length != 5) {
                 alert("Слово должно быть из 5 букв.");
@@ -90,6 +91,7 @@
                     alert ("ПОБЕДА!!!");
                     document.getElementById("send").disabled = true;
                     document.getElementById("word").disabled = true;
+                    return;
                 }
 
                 attempt++;
