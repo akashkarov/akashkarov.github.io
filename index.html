@@ -44,7 +44,7 @@
             }
             var dict = new Object();
             for (var i = 0; i < word.length; i++) {
-                var indcies = indeciesOf(word[i], target);
+                var indecies = indeciesOf(word[i], target);
                 for (var index in indecies) {
                     if (index > -1 && found.indexOf(index) < 0 && dict[word[i]] != 0) {
                         result[i] = 0;
