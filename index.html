@@ -59,7 +59,9 @@
                         used[c] = 1;
                         dict[c] = dict[c].filter((value, index, arr) => value != foundIndex);
                     } else {
-                        result[i] = 0;
+                        indexes.forEach((index) => {
+                            if (result[index] < 0) result[index] = 0;
+                        });
                         if (used[c] < 1) used[c] = 0;
                         dict[c].shift();
                     }
