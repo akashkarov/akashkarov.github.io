@@ -55,6 +55,7 @@
                         result[i] = 0;
                         dict[c].shift();
                     }
+                    if (dict[c].length == 0) delete dict[c];
                 }
             }
             return result;
