@@ -97,6 +97,12 @@
             for (var i = 0; i < word.length; i++) {
                 for (var j = 0; j < letTds.length; j++) {
                     if (letTds[j].innerText == word[i]) {
+                        if (letTds[j].style.backgroundColor == '#ff0') break;
+                        if (letTds[j].style.backgroundColor == '#ddd' && result[i] == 1) {
+                            letTds[j].style.backgroundColor = "#ff0";
+                            letTds[j].style.color = "#333";
+                            break;
+                        }
                         letTds[j].style.backgroundColor = result[i] < 0 ? "#777" : result[i] == 0 ? "#ddd" : "#ff0";
                         letTds[j].style.color = result[i] < 0 ? "#ddd" : result[i] == 0 ? "#333" : "#333";
                         break;
