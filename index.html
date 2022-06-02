@@ -57,7 +57,7 @@
                         var foundIndex = dict[c].find((element) => indexes.includes(element));
                         result[foundIndex] = 1;
                         used[c] = 1;
-                        dict[c] = dict[c].filter((value, index, arr) => value != i);
+                        dict[c] = dict[c].filter((value, index, arr) => value != foundIndex);
                     } else {
                         result[i] = 0;
                         if (used[c] < 1) used[c] = 0;
