@@ -17,7 +17,7 @@
         const MAX_ATTEMPTS = 6;
 
         function newGame() {
-            var rndIndex = Math.floor(Math.random() * (words.length - 1));
+            var rndIndex = Math.floor(Math.random() * words.length);
             target = words[rndIndex];
             attempt = 1;
             console.log(target);
@@ -119,7 +119,7 @@
 
             setTimeout(function(){
                 if (word == target) {
-                    var rndIndex = Math.floor(Math.random() * (congrats.length - 1));
+                    var rndIndex = Math.floor(Math.random() * congrats.length);
                     alert ("ПОБЕДА!!!\r\n" + congrats[rndIndex]);
                     document.getElementById("send").disabled = true;
                     document.getElementById("word").disabled = true;
