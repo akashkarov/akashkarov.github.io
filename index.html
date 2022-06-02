@@ -105,8 +105,8 @@
             for (var i = 0; i < word.length; i++) {
                 for (var j = 0; j < letTds.length; j++) {
                     if (letTds[j].innerText == word[i]) {
-                        letTds[j].style.backgroundColor = used[word[i]] < 0 ? "#777" : used[word[i]] == 0 ? "#ddd" : "#ff0";
-                        letTds[j].style.color = used[word[i]] < 0 ? "#ddd" : used[word[i]] == 0 ? "#333" : "#333";
+                        letTds[j].style.backgroundColor = used[word[i]] < -1 ? "#333" : used[word[i]] == -1 ? "#777" : used[word[i]] == 0 ? "#ddd" : "#ff0";
+                        letTds[j].style.color = used[word[i]] < 0 ? "#ddd" : "#333";
                         break;
                     }
                 }
