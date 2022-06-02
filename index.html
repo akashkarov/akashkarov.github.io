@@ -54,11 +54,10 @@
                 if (dict.hasOwnProperty(c)) {
                     var indexes = indexesOf(c, word);
                     if (dict[c].some((element) => indexes.includes(element))) {
-                        result[i] = 1;
+                        var foundIndex = dict[c].find((element) => indexes.includes(element));
+                        result[foundIndex] = 1;
                         used[c] = 1;
-                        dict[c] = dict[c].filter(function(value, index, arr){ 
-                            return value != i;
-                        });
+                        dict[c] = dict[c].filter((value, index, arr) => value != i);
                     } else {
                         result[i] = 0;
                         if (used[c] < 1) used[c] = 0;
