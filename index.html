@@ -49,6 +49,44 @@
                 used[String.fromCharCode(i)] = -2;
             }
         }
+		
+		function openLetter() {
+			disabled = true;
+			document.getElementById("help").style.display = "none";
+			var word = target;
+			word = shuffleArray(word.split('')).join('');
+			for (var i = 0; i < word.length; i++) {
+				if (used[word[i]] < 1) {
+					var index = target.indexOf(word[i]);
+					
+					var grid = document.getElementById("grid");
+					var tr = grid.getElementsByTagName("tr")[attempt-1];
+					var tds = tr.getElementsByTagName("td");
+					tds[index].innerText = target[index];
+					tds[index].style.color = "#333";
+					tds[index].style.backgroundColor = "#ff0";
+					
+					setTimeout(function() {
+						tds[index].style.color = "#ddd";
+						tds[index].style.backgroundColor = "#333";
+						tds[index].innerText = '';
+						disabled = false;
+					}, 3000);
+					
+					break;
+				}
+			}
+		}
+		
+		function shuffleArray(array) {
+			for (var i = array.length - 1; i > 0; i--) {
+				var j = Math.floor(Math.random() * (i + 1));
+				var temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+			}
+			return array;
+		}
 
         function checkWord(word) {
             var result = [-1, -1, -1, -1, -1];
@@ -61,7 +99,7 @@
             
             for (var i = 0; i < word.length; i++) {
                 var c = word[i];
-                used[c] = -1;
+                if (used[c] < 0) used[c] = -1;
                 if (dict.hasOwnProperty(c)) {
                     var indexes = indexesOf(c, word);
                     if (dict[c].some((element) => indexes.includes(element))) {
@@ -135,6 +173,7 @@
                 tds[i].innerText = word[i];
 				tds[i].style.color = "#333";
                 tds[i].style.backgroundColor = result[i] < 0 ? "#777" : result[i] == 0 ? "#ddd" : "#ff0";
+				tds[i].style.animation = "bounce 0.33s";
             }
 
             var letters = document.getElementById("letters");
@@ -163,10 +202,10 @@
 					disabled = true;
                 }
 				
-				<!-- if (attempt == MAX_ATTEMPTS && bestResult < 0) { -->
-					<!-- document.getElementById("help").style.display = "inherit"; -->
-				<!-- } -->
-            }, 0);
+				if (attempt == MAX_ATTEMPTS && bestResult < 0) {
+					document.getElementById("help").style.display = "inherit";
+				}
+            }, 1000);
         }
 
 		document.addEventListener("keydown", function(e) {
@@ -180,6 +219,9 @@
 			if (e.key == "Backspace") word = word.substring(0, word.length - 1);
 			else if (e.key.length > 1) return;
 			else word += e.key;
+			
+			if (word.length > 5) return;
+			
 			current = word;
 			var grid = document.getElementById("grid");
 			var tr = grid.getElementsByTagName("tr")[attempt - 1];
@@ -202,6 +244,7 @@
 					var word = current;
 					if (this.id == "backspace") word = word.substring(0, word.length - 1);
 					else word += c;
+					if (word.length > 5) return;
 					current = word;
 					var grid = document.getElementById("grid");
 					var tr = grid.getElementsByTagName("tr")[attempt-1];
@@ -235,7 +278,24 @@
             text-transform: capitalize;
             background-color: #333;
             color: #ddd;
+			transition: all 0.66s ease-in-out;
         }
+		
+		@keyframes bounce {
+			0% {
+				transform: scale(1.0);
+				-webkit-transform: scale(1.0);
+			}
+			50% {
+				transform: scale(1.1);
+				-webkit-transform: scale(1.1);
+			}
+			100% {
+				transform: scale(1.0);
+				-webkit-transform: scale(1.0);
+			}
+		}
+		
         #letters {
             height: auto;
         }
@@ -291,7 +351,7 @@
 			<span class="title">Угадай слово</span>
 			<div class="menu">
 				<button id="new" class="btn" onclick="if (confirm('Начать новую игру?')) { newGame(); }">+</button>
-				<button id="help" class="btn">?</button>
+				<button id="help" class="btn" onclick="openLetter()">?</button>
 			</div>
 		</div>
         <hr />
