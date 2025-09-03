@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=0.93, maximum-scale=0.93, user-scalable=no">
         <title>Угадайка</title>
     </head>
+	<script src="https://unpkg.com/fireworks-js@2.x/dist/index.umd.js"></script>
     <script type="text/javascript">
 		var lang = "ru";
         var congrats = {"ru": ["Котик - молодец!",
@@ -36,6 +37,11 @@
         const MAX_ATTEMPTS = 6;
 
         function newGame() {
+			var container = document.getElementById("wrapper");
+			const fireworks = new Fireworks.default(container);
+  			fireworks.start();
+			return;
+			
             var rndIndex = Math.floor(Math.random() * words[lang].length);
             target = words[lang][rndIndex];
 			current = "";
@@ -467,3 +473,4 @@
         </div>
     </body>
 </html>
+
